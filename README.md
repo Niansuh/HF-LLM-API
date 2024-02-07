@@ -14,13 +14,13 @@ Project link: https://github.com/Niansuh/HF-LLM-API
 
 ## Features
 
-- Available Models (2024/01/22): [#5](https://github.com/Niansuh/HF-LLM-API/issues/2)
+- Available Models (2024/01/22): [#2](https://github.com/Niansuh/HF-LLM-API/issues/2)
   - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`
   - Adaptive prompt templates for different models
 - Support OpenAI API format
   - Enable api endpoint via official `openai-python` package
 - Support both stream and no-stream response
-- Support API Key via both HTTP auth header and env varible [#4](https://github.com/Niansuh/HF-LLM-API/issues/1)
+- Support API Key via both HTTP auth header and env varible [#1](https://github.com/Niansuh/HF-LLM-API/issues/1)
 - Docker deployment
 
 ## Run API service
