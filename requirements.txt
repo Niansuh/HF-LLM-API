@@ -1,6 +1,7 @@
 aiohttp
 fastapi
 httpx
+jinja2
 markdown2[all]
 openai
 pydantic
@@ -8,5 +9,6 @@ requests
 sse_starlette
 termcolor
 tiktoken
+transformers
 uvicorn
 websockets
