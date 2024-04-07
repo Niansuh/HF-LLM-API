@@ -4,7 +4,6 @@ on:
     paths:
       - "configs/info.json"
       - "./Dockerfile"
-      - ".github/workflows/sync_to_hf_space.yml"
   workflow_dispatch:
 
 jobs:
