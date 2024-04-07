@@ -10,6 +10,8 @@ app_port: 23333
 ## HF-LLM-API
 Huggingface LLM Inference API in OpenAI message format.
 
+***Original Repo link: https://github.com/Hansimov/hf-llm-api***
+
 ## Features
 
 - Available Models (2024/01/22): [#2](https://github.com/Niansuh/HF-LLM-API/issues/2)
