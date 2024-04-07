@@ -8,19 +8,22 @@ app_port: 23333
 ---
 
 ## HF-LLM-API
+
+![](https://img.shields.io/github/v/release/Niansuh/HF-LLM-API?label=HF-LLM-API&color=blue&cacheSeconds=60)
+
 Huggingface LLM Inference API in OpenAI message format.
 
 ***Original Repo link: https://github.com/Hansimov/hf-llm-api***
 
 ## Features
 
-- Available Models (2024/01/22): [#2](https://github.com/Niansuh/HF-LLM-API/issues/2)
-  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-7b`, `openchat-3.5`
+- Available Models (2024/04/07): [#2](https://github.com/Niansuh/HF-LLM-API/issues/2)
+  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-7b`, `openchat-3.5`, `gpt-3.5.turbo`
   - Adaptive prompt templates for different models
 - Support OpenAI API format
   - Enable api endpoint via official `openai-python` package
 - Support both stream and no-stream response
-- Support API Key via both HTTP auth header and env varible [#1](https://github.com/Niansuh/HF-LLM-API/issues/1)
+- Support API Key via both HTTP auth header and env variable
 - Docker deployment
 
 ## Run API service
