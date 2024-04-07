@@ -2,8 +2,9 @@ name: Sync to Hugging Face hub
 on:
   push:
     paths:
-      - "configs/info.json"
+      - "configs/config.json"
       - "./Dockerfile"
+      - ".github/workflows/sync_to_hf_space.yml"
   workflow_dispatch:
 
 jobs:
@@ -17,4 +18,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push -f https://Niansuh:$HF_TOKEN@huggingface.co/spaces/Niansuh/HFLLMAPI main
+        run: git push -f https://Niansuh:$HF_TOKEN@huggingface.co/spaces/Niansuh/HFLLMAPI main:main
