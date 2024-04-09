@@ -3,7 +3,7 @@ MODEL_MAP = {
     "nous-mixtral-8x7b": "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
     "mistral-7b": "mistralai/Mistral-7B-Instruct-v0.2",
     "openchat-3.5": "openchat/openchat-3.5-0106",
-    "gemma-7b-1.1": "google/gemma-1.1-7b-it",
+    "gemma-1.1-7b": "google/gemma-1.1-7b-it",
     "default": "mistralai/Mixtral-8x7B-Instruct-v0.1",
 }
 
@@ -13,7 +13,7 @@ STOP_SEQUENCES_MAP = {
     "nous-mixtral-8x7b": "<|im_end|>",
     "mistral-7b": "</s>",
     "openchat-3.5": "<|end_of_turn|>",
-    "gemma-7b-1.1": "<eos>",
+    "gemma-1.1-7b": "<eos>",
 }
 
 TOKEN_LIMIT_MAP = {
@@ -21,7 +21,7 @@ TOKEN_LIMIT_MAP = {
     "nous-mixtral-8x7b": 32768,
     "mistral-7b": 32768,
     "openchat-3.5": 8192,
-    "gemma-7b-1.1": 8192,
+    "gemma-1.1-7b": 8192,
     "gpt-3.5-turbo": 8192,
 }
 
@@ -33,7 +33,7 @@ AVAILABLE_MODELS = [
     "nous-mixtral-8x7b",
     "mistral-7b",
     "openchat-3.5",
-    "-7b-1.1",
+    "gemma-1.1-7b",
     "gpt-3.5-turbo",
 ]
 
@@ -68,7 +68,7 @@ AVAILABLE_MODELS_DICTS = [
         "owned_by": "openchat",
     },
     {
-        "id": "gemma-7b-1.1",
+        "id": "gemma-1.1-7b",
         "description": "[google/gemma-1.1-7b-it]: https://huggingface.co/google/gemma-1.1-7b-it",
         "object": "model",
         "created": 1700000000,
