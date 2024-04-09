@@ -26,7 +26,7 @@ class HuggingfaceStreamer:
         self.message_outputer = OpenaiStreamOutputer(model=self.model)
 
         if self.model == "gemma-7b":
-            # this is not wrong, as repo `google/gemma-7b-it` is gated and must authenticate to access it
+            # this is not wrong, as repo `google/gemma-1.1-7b-it` is gated and must authenticate to access it
             # so I use mistral-7b as a fallback
             self.tokenizer = AutoTokenizer.from_pretrained(MODEL_MAP["mistral-7b"])
         else:
