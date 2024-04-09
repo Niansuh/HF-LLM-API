@@ -18,7 +18,7 @@ Huggingface LLM Inference API in OpenAI message format.
 ## Features
 
 - Available Models (2024/04/07): [#2](https://github.com/Niansuh/HF-LLM-API/issues/2)
-  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-7b`, `openchat-3.5`, `gpt-3.5.turbo`
+  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-1.1-7b`, `openchat-3.5`, `gpt-3.5.turbo`
   - Adaptive prompt templates for different models
 - Support OpenAI API format
   - Enable api endpoint via official `openai-python` package
