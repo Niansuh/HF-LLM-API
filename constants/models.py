@@ -3,7 +3,7 @@ MODEL_MAP = {
     "nous-mixtral-8x7b": "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
     "mistral-7b": "mistralai/Mistral-7B-Instruct-v0.2",
     "openchat-3.5": "openchat/openchat-3.5-0106",
-    "gemma-7b": "google/gemma-7b-it",
+    "gemma-7b": "google/gemma-1.1-7b-it",
     "default": "mistralai/Mixtral-8x7B-Instruct-v0.1",
 }
 
@@ -69,7 +69,7 @@ AVAILABLE_MODELS_DICTS = [
     },
     {
         "id": "gemma-7b",
-        "description": "[google/gemma-7b-it]: https://huggingface.co/google/gemma-7b-it",
+        "description": "[google/gemma-1.1-7b-it]: https://huggingface.co/google/gemma-1.1-7b-it",
         "object": "model",
         "created": 1700000000,
         "owned_by": "Google",
