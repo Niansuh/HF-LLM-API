@@ -87,8 +87,15 @@ class ChatAPIApp:
         )
 
     def chat_completions(
-        self, item: ChatCompletionsPostItem, api_key: str = Depends(extract_api_key)
+        self, item: ChatCompletionsPostItem, credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer(auto_error=True))
     ):
+        api_key=credentials.credentials
+        if api_key != os.getenv("HF_TOKEN"):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid authorization code",
+            )
+            
         if item.model == "gpt-3.5-turbo":
             streamer = OpenaiStreamer()
             stream_response = streamer.chat_response(messages=item.messages)
