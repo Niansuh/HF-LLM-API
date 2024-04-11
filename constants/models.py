@@ -63,7 +63,7 @@ AVAILABLE_MODELS_DICTS = [
         "owned_by": "openchat",
     },
     {
-        "id": "gemma-1.1-7b-it",
+        "id": "gemma-1.1-7b",
         "description": "[google/gemma-1.1-7b-it]: https://huggingface.co/google/gemma-1.1-7b-it",
         "object": "model",
         "created": 1700000000,
