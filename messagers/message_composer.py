@@ -52,7 +52,7 @@ class MessageComposer:
         #   - https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1#instruction-format
         #   - https://huggingface.co/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO#prompt-format
         #   - https://huggingface.co/openchat/openchat-3.5-0106
-        #   - https://huggingface.co/google/gemma-1.1-7b-it#chat-template
+        #   - https://huggingface.co/google/gemma-7b-it#chat-template
 
         # Mistral and Mixtral:
         #   <s> [INST] Instruction [/INST] Model answer </s> [INST] Follow-up instruction [/INST]
@@ -125,8 +125,8 @@ class MessageComposer:
                     )
             self.merged_str_list.append(f"GPT4 Correct Assistant:\n")
             self.merged_str = "\n".join(self.merged_str_list)
-        # https://huggingface.co/google/gemma-1.1-7b-it#chat-template
-        elif self.model in ["gemma-1.1-7b"]:
+        # https://huggingface.co/google/gemma-7b-it#chat-template
+        elif self.model in ["gemma-7b"]:
             self.messages = self.concat_messages_by_role(messages)
             self.merged_str_list = []
             self.end_of_turn = "<end_of_turn>"
@@ -152,9 +152,13 @@ class MessageComposer:
         # https://huggingface.co/openchat/openchat-3.5-0106
         # elif self.model in ["openchat-3.5", "nous-mixtral-8x7b"]:
         elif self.model in ["openchat-3.5", "command-r-plus"]:
-            tokenizer = AutoTokenizer.from_pretrained("self.model_fullname")
+            tokenizer = AutoTokenizer.from_pretrained(self.model_fullname)
             self.merged_str = tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
+            )
+        else:
+            self.merged_str = "\n\n".join(
+                [f"{message['role']}: {message['content']}" for message in messages]
             )
 
         return self.merged_str
@@ -163,7 +167,7 @@ class MessageComposer:
 if __name__ == "__main__":
     # model = "mixtral-8x7b"
     # model = "nous-mixtral-8x7b"
-    # model = "gemma-1.1-7b"
+    # model = "gemma-7b"
     # model = "openchat-3.5"
     model = "command-r-plus"
     composer = MessageComposer(model)
