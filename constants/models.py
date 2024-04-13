@@ -2,7 +2,7 @@ MODEL_MAP = {
     "mixtral-8x7b": "mistralai/Mixtral-8x7B-Instruct-v0.1",  # [Recommended]
     "nous-mixtral-8x7b": "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
     "mistral-7b": "mistralai/Mistral-7B-Instruct-v0.2",
-    "zephyr-orpo-141b": "HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
+    "openchat-3.5": "openchat/openchat-3.5-0106",
     "gemma-1.1-7b": "google/gemma-1.1-7b-it",
     "command-r-plus": "CohereForAI/c4ai-command-r-plus",
     "default": "mistralai/Mixtral-8x7B-Instruct-v0.1",
@@ -14,7 +14,7 @@ STOP_SEQUENCES_MAP = {
     "mixtral-8x7b": "</s>",
     "nous-mixtral-8x7b": "<|im_end|>",
     "mistral-7b": "</s>",
-    "zephyr-orpo-141b": "<|end_of_turn|>",
+    "openchat-3.5": "<|end_of_turn|>",
     "gemma-1.1-7b": "<eos>",
     "command-r-plus": "<|END_OF_TURN_TOKEN|>",
 }
@@ -23,7 +23,7 @@ TOKEN_LIMIT_MAP = {
     "mixtral-8x7b": 32768,
     "nous-mixtral-8x7b": 32768,
     "mistral-7b": 32768,
-    "zephyr-orpo-141b": 8192,
+    "openchat-3.5": 8192,
     "gemma-1.1-7b": 8192,
     "gpt-3.5-turbo": 8192,
     "command-r-plus": 32768,
@@ -56,11 +56,11 @@ AVAILABLE_MODELS_DICTS = [
         "owned_by": "mistralai",
     },
     {
-        "id": "zephyr-orpo-141b",
-        "description": "[HuggingFaceH4/zephyr-orpo-141b]: https://huggingface.co/HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
+        "id": "openchat-3.5",
+        "description": "[openchat/openchat-3.5-0106]: https://huggingface.co/openchat/openchat-3.5-0106",
         "object": "model",
         "created": 1700000000,
-        "owned_by": "HuggingFaceH4",
+        "owned_by": "openchat",
     },
     {
         "id": "gemma-1.1-7b",
