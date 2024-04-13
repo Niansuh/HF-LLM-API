@@ -48,10 +48,10 @@ class MessageComposer:
 
     def merge(self, messages) -> str:
         # Templates for Chat Models
-        # - https://huggingface.co/docs/transformers/main/en/chat_templating
+        #   - https://huggingface.co/docs/transformers/main/en/chat_templating
         #   - https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1#instruction-format
         #   - https://huggingface.co/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO#prompt-format
-        #   - https://huggingface.co/openchat/openchat-3.5-0106
+        #   - https://huggingface.co/HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1
         #   - https://huggingface.co/google/gemma-1.1-7b-it#chat-template
 
         # Mistral and Mixtral:
@@ -64,8 +64,8 @@ class MessageComposer:
         #   Hello, who are you?<|im_end|>
         #   <|im_start|>assistant
 
-        # OpenChat:
-        #   GPT4 Correct User: Hello<|end_of_turn|>GPT4 Correct Assistant: Hi<|end_of_turn|>GPT4 Correct User: How are you today?<|end_of_turn|>GPT4 Correct Assistant:
+        # HuggingFaceH4:
+        #   zephyr-orpo-141b Correct User: Hello<|end_of_turn|>zephyr-orpo-141b Correct Assistant: Hi<|end_of_turn|>zephyr-orpo-141b Correct User: How are you today?<|end_of_turn|>zephyr-orpo-141b Correct Assistant:
 
         # Google Gemma-it
         # <start_of_turn>user
@@ -103,8 +103,8 @@ class MessageComposer:
                 self.merged_str_list.append(message_line)
             self.merged_str_list.append("<|im_start|>assistant")
             self.merged_str = "\n".join(self.merged_str_list)
-        # https://huggingface.co/openchat/openchat-3.5-0106
-        elif self.model in ["openchat-3.5"]:
+        # https://huggingface.co/HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1
+        elif self.model in ["zephyr-orpo-141b"]:
             self.messages = self.concat_messages_by_role(messages)
             self.merged_str_list = []
             self.end_of_turn = "<|end_of_turn|>"
@@ -113,17 +113,17 @@ class MessageComposer:
                 content = message["content"]
                 if role in self.inst_roles:
                     self.merged_str_list.append(
-                        f"GPT4 Correct User:\n{content}{self.end_of_turn}"
+                        f"zephyr-orpo-141b Correct User:\n{content}{self.end_of_turn}"
                     )
                 elif role in self.answer_roles:
                     self.merged_str_list.append(
-                        f"GPT4 Correct Assistant:\n{content}{self.end_of_turn}"
+                        f"zephyr-orpo-141b Correct Assistant:\n{content}{self.end_of_turn}"
                     )
                 else:
                     self.merged_str_list.append(
-                        f"GPT4 Correct User: {content}{self.end_of_turn}"
+                        f"zephyr-orpo-141b Correct User: {content}{self.end_of_turn}"
                     )
-            self.merged_str_list.append(f"GPT4 Correct Assistant:\n")
+            self.merged_str_list.append(f"zephyr-orpo-141b Correct Assistant:\n")
             self.merged_str = "\n".join(self.merged_str_list)
         # https://huggingface.co/google/gemma-1.1-7b-it#chat-template
         elif self.model in ["gemma-1.1-7b"]:
@@ -149,9 +149,9 @@ class MessageComposer:
             self.merged_str_list.append(f"{self.start_of_turn}model\n")
             self.merged_str = "\n".join(self.merged_str_list)
         # https://huggingface.co/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO#prompt-format
-        # https://huggingface.co/openchat/openchat-3.5-0106
-        # elif self.model in ["openchat-3.5", "nous-mixtral-8x7b"]:
-        elif self.model in ["openchat-3.5", "command-r-plus"]:
+        # https://huggingface.co/HuggingFaceH4/zephyr-orpo-141b
+        # elif self.model in ["zephyr-orpo-141b", "nous-mixtral-8x7b"]:
+        elif self.model in ["zephyr-orpo-141b", "command-r-plus"]:
             tokenizer = AutoTokenizer.from_pretrained(self.model_fullname)
             self.merged_str = tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
@@ -168,13 +168,13 @@ if __name__ == "__main__":
     # model = "mixtral-8x7b"
     # model = "nous-mixtral-8x7b"
     # model = "gemma-1.1-7b"
-    # model = "openchat-3.5"
+    # model = "zephyr-orpo-141b"
     model = "command-r-plus"
     composer = MessageComposer(model)
     messages = [
         {
             "role": "system",
-            "content": "You are a LLM developed by OpenAI.\nYour name is GPT-4.",
+            "content": "You are Zephyr, an assistant developed by KAIST AI, Argilla, and Hugging Face. You should give concise responses to very simple questions, but provide thorough responses to more complex and open-ended questions. You are happy to help with writing, analysis, question answering, math, coding, and all sorts of other tasks.",
         },
         {"role": "user", "content": "Hello, who are you?"},
         {"role": "assistant", "content": "I am a bot."},
