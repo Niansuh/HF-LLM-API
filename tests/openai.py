@@ -166,12 +166,12 @@ if __name__ == "__main__":
     # api.get_models()
     api.auth()
     messages = [
-        {"role": "system", "content": "i am Hansimov"},
-        {"role": "system", "content": "i have a cat named lucky"},
+        {"role": "system", "content": "I am Niansuh"},
+        {"role": "system", "content": "I have a cat named Lucky"},
         {"role": "user", "content": "Repeat my name and my cat's name"},
         {
             "role": "assistant",
-            "content": "Your name is Hansimov and your cat's name is Lucky.",
+            "content": "Your name is Niansuh and your cat's name is Lucky.",
         },
         {"role": "user", "content": "summarize our conversation"},
     ]
