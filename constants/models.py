@@ -60,7 +60,7 @@ AVAILABLE_MODELS_DICTS = [
         "description": "[HuggingFaceH4/zephyr-orpo-141b]: https://huggingface.co/HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
         "object": "model",
         "created": 1700000000,
-        "owned_by": "openchat",
+        "owned_by": "HuggingFaceH4",
     },
     {
         "id": "gemma-1.1-7b",
