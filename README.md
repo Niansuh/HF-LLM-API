@@ -13,10 +13,12 @@ app_port: 23333
 
 Huggingface LLM Inference API in OpenAI message format.
 
+Project link: https://github.com/Niansuh/HF-LLM-API
+
 ## Features
 
-- Available Models (2024/04/18):
-  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-7b`, `gpt-3.5-turbo`
+- Available Models (2024/04/20):
+  - `mistral-7b`, `mixtral-8x7b`, `nous-mixtral-8x7b`, `gemma-7b`, `command-r-plus`, `llama3-70b`, `zephyr-141b`, `gpt-3.5-turbo`
   - Adaptive prompt templates for different models
 - Support OpenAI API format
   - Enable api endpoint via official `openai-python` package
@@ -77,7 +79,7 @@ api_key = "hf_xxxxxxxxxxxxxxxx"
 
 client = OpenAI(base_url=base_url, api_key=api_key)
 response = client.chat.completions.create(
-    model="mixtral-8x7b",
+    model="nous-mixtral-8x7b",
     messages=[
         {
             "role": "user",
@@ -116,7 +118,7 @@ api_key = "hf_xxxxxxxxxxxxxxxx"
 
 requests_headers = {}
 requests_payload = {
-    "model": "mixtral-8x7b",
+    "model": "nous-mixtral-8x7b",
     "messages": [
         {
             "role": "user",
