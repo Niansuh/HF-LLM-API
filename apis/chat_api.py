@@ -14,12 +14,13 @@ from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse, ServerSentEvent
 from tclogger import logger
 
-from constants.models import AVAILABLE_MODELS_DICTS
+from constants.models import AVAILABLE_MODELS_DICTS, PRO_MODELS
 from constants.envs import CONFIG
 
 from messagers.message_composer import MessageComposer
 from mocks.stream_chat_mocker import stream_chat_mock
 from networks.huggingface_streamer import HuggingfaceStreamer
+from networks.huggingchat_streamer import HuggingchatStreamer
 from networks.openai_streamer import OpenaiStreamer
 
 
@@ -58,8 +59,8 @@ class ChatAPIApp:
 
     class ChatCompletionsPostItem(BaseModel):
         model: str = Field(
-            default="mixtral-8x7b",
-            description="(str) `mixtral-8x7b`",
+            default="nous-mixtral-8x7b",
+            description="(str) `nous-mixtral-8x7b`",
         )
         messages: list = Field(
             default=[{"role": "user", "content": "Hello, who are you?"}],
@@ -92,6 +93,11 @@ class ChatAPIApp:
         if item.model == "gpt-3.5-turbo":
             streamer = OpenaiStreamer()
             stream_response = streamer.chat_response(messages=item.messages)
+        elif item.model in PRO_MODELS:
+            streamer = HuggingchatStreamer(model=item.model)
+            stream_response = streamer.chat_response(
+                messages=item.messages,
+            )
         else:
             streamer = HuggingfaceStreamer(model=item.model)
             composer = MessageComposer(model=item.model)
