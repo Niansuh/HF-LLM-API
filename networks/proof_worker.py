@@ -20,7 +20,7 @@ class ProofWorker:
         tz = timezone(timedelta(hours=8))
         now = now.astimezone(tz)
         time_format = "%a %b %d %Y %H:%M:%S"
-        return now.strftime(time_format) + " GMT+0800 (中国标准时间)"
+        return now.strftime(time_format) + " GMT+0500 (Pakistan Standard Time)"
 
     def get_config(self):
         cores = [8, 12, 16, 24]
