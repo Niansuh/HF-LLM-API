@@ -1,6 +1,6 @@
 ---
 title: HF LLM API
-emoji: ☯️
+emoji: ☪️
 colorFrom: gray
 colorTo: gray
 sdk: docker
