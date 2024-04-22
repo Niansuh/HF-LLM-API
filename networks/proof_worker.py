@@ -35,7 +35,7 @@ class ProofWorker:
             OPENAI_GET_HEADERS["User-Agent"],
         ]
 
-    def calc_proof_token(self, seed: str, difficulty: str):
+    def calc_proof_token(self, seed: str, difficulty: str, user_id: str):
         config = self.get_config()
         diff_len = len(difficulty) // 2
         for i in range(100000):
@@ -47,15 +47,13 @@ class ProofWorker:
             hash = hasher.digest().hex()
             if hash[:diff_len] <= difficulty:
                 return "gAAAAAB" + base
-        self.proof_token = (
-            self.proof_token_prefix + base64.b64encode(seed.encode()).decode()
-        )
-        return self.proof_token
+
+        raise RuntimeError("Proof token couldn't be generated")
 
 
 if __name__ == "__main__":
     seed, difficulty = "0.42665582693491433", "05cdf2"
+    user_id = "Niansuh"
     worker = ProofWorker()
-    proof_token = worker.calc_proof_token(seed, difficulty)
+    proof_token = worker.calc_proof_token(seed, difficulty, user_id)
     print(f"proof_token: {proof_token}")
-    # python -m networks.proof_worker
