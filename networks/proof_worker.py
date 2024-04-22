@@ -37,21 +37,24 @@ class ProofWorker:
         ]
 
     def calc_proof_token(self, seed: str, difficulty: str):
-        config = self.get_config()
-        diff_len = len(difficulty) // 2
-        for i in range(100000):
-            config[3] = i
-            json_str = json.dumps(config)
-            base = base64.b64encode(json_str.encode()).decode()
-            hasher = sha3_512()
-            hasher.update((seed + base).encode())
-            hash_val = hasher.digest().hex()
-            if hash_val[:diff_len] <= difficulty:
-                return "gAAAAAB" + base
-        self.proof_token = (
-            self.proof_token_prefix + base64.b64encode(seed.encode()).decode()
-        )
-        return self.proof_token
+        try:
+            config = self.get_config()
+            diff_len = len(difficulty) // 2
+            for i in range(100000):
+                config[3] = i
+                json_str = json.dumps(config)
+                base = base64.b64encode(json_str.encode()).decode()
+                hasher = sha3_512()
+                hasher.update((seed + base).encode())
+                hash_val = hasher.digest().hex()
+                if hash_val[:diff_len] <= difficulty:
+                    return "gAAAAAB" + base
+            self.proof_token = (
+                self.proof_token_prefix + base64.b64encode(seed.encode()).decode()
+            )
+            return self.proof_token
+        except Exception as e:
+            return str(e)
 
 
 if __name__ == "__main__":
@@ -59,5 +62,7 @@ if __name__ == "__main__":
     seed, difficulty = "0.42665582693491433", "05cdf2"
     worker = ProofWorker(user_name)
     proof_token = worker.calc_proof_token(seed, difficulty)
+    decoded_proof_token = base64.b64decode(proof_token.encode()).decode()
     print(f"proof_token: {proof_token}")
+    print(f"decoded_proof_token: {decoded_proof_token}")
     # python -m networks.proof_worker
