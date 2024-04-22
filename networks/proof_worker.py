@@ -1,12 +1,19 @@
 import base64
+from hashlib import sha3_512
 import json
 import random
+
 from datetime import datetime, timedelta, timezone
+
 from constants.headers import OPENAI_GET_HEADERS
 
+
 class ProofWorker:
-    def __init__(self):
-        pass
+    def __init__(self, difficulty=None, required=False, seed=None):
+        self.difficulty = difficulty
+        self.required = required
+        self.seed = seed
+        self.proof_token_prefix = "gAAAAABwQ8Lk5FbGpA2NcR9dShT6gYjU7VxZ4D"
 
     def get_parse_time(self):
         now = datetime.now()
@@ -35,14 +42,20 @@ class ProofWorker:
             config[3] = i
             json_str = json.dumps(config)
             base = base64.b64encode(json_str.encode()).decode()
-            # You can modify the proof generation logic here as per your requirement
-            # For now, I'm just returning a placeholder string
-            return f"proof_token_for_{seed}_{difficulty}"
+            hasher = sha3_512()
+            hasher.update((seed + base).encode())
+            hash = hasher.digest().hex()
+            if hash[:diff_len] <= difficulty:
+                return "gAAAAAB" + base
+        self.proof_token = (
+            self.proof_token_prefix + base64.b64encode(seed.encode()).decode()
+        )
+        return self.proof_token
+
 
 if __name__ == "__main__":
-    worker = ProofWorker()
-    config = worker.get_config()
-    print("Config:", config)
     seed, difficulty = "0.42665582693491433", "05cdf2"
+    worker = ProofWorker()
     proof_token = worker.calc_proof_token(seed, difficulty)
-    print(f"Proof token: {proof_token}")
+    print(f"proof_token: {proof_token}")
+    # python -m networks.proof_worker
