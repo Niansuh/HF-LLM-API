@@ -1,3 +1,5 @@
+import base64
+import json
 import random
 from datetime import datetime, timedelta, timezone
 from constants.headers import OPENAI_GET_HEADERS
@@ -26,7 +28,21 @@ class ProofWorker:
             OPENAI_GET_HEADERS["User-Agent"],
         ]
 
+    def calc_proof_token(self, seed: str, difficulty: str):
+        config = self.get_config()
+        diff_len = len(difficulty) // 2
+        for i in range(100000):
+            config[3] = i
+            json_str = json.dumps(config)
+            base = base64.b64encode(json_str.encode()).decode()
+            # You can modify the proof generation logic here as per your requirement
+            # For now, I'm just returning a placeholder string
+            return f"proof_token_for_{seed}_{difficulty}"
+
 if __name__ == "__main__":
     worker = ProofWorker()
     config = worker.get_config()
     print("Config:", config)
+    seed, difficulty = "0.42665582693491433", "05cdf2"
+    proof_token = worker.calc_proof_token(seed, difficulty)
+    print(f"Proof token: {proof_token}")
