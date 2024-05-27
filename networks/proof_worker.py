@@ -9,7 +9,10 @@ from constants.headers import OPENAI_GET_HEADERS
 
 
 class ProofWorker:
-    def __init__(self):
+    def __init__(self, difficulty=None, required=False, seed=None):
+        self.difficulty = difficulty
+        self.required = required
+        self.seed = seed
         self.proof_token_prefix = "gAAAAABwQ8Lk5FbGpA2NcR9dShT6gYjU7VxZ4D"
 
     def get_parse_time(self):
@@ -44,14 +47,15 @@ class ProofWorker:
             hash = hasher.digest().hex()
             if hash[:diff_len] <= difficulty:
                 return "gAAAAAB" + base
-        return None  # Returning None if proof token calculation fails
+        self.proof_token = (
+            self.proof_token_prefix + base64.b64encode(seed.encode()).decode()
+        )
+        return self.proof_token
 
 
 if __name__ == "__main__":
     seed, difficulty = "0.42665582693491433", "05cdf2"
     worker = ProofWorker()
     proof_token = worker.calc_proof_token(seed, difficulty)
-    if proof_token:
-        print(f"proof_token: {proof_token}")
-    else:
-        print("Failed to generate proof token.")
+    print(f"proof_token: {proof_token}")
+    # python -m networks.proof_worker
